@@ -17,7 +17,7 @@ age(5)
 // 2.1. Funkcija grąžina atsakymą tokiu formatu: norint perskaityti 10 knygų per metus, vienai knygai perskaityti turėsi 36 dienas.
 
 function books(num) {
-  let calcDays = Math.round(365 / num)
+  let calcDays = Math.floor(365 / num)
   let output = `Norint perskaityti ${num} knygų per metus, vienai knygai perskaityti turėsi ${calcDays} dienas.`
 
   console.log(output)
@@ -43,13 +43,13 @@ days(35)
 // 4.1. Funkcija grąžina atsakymą tokiu formatu (atsakymą apvalinant): 365 dienos yra 1 metai.
 
 function daysToYears(num) {
-  let calcYears = Math.round(num / 365) / 10
+  let calcYears = (num / 365).toFixed(2)
   let output = `${num} dienos yra ${calcYears} metai.`
 
   console.log(output)
 }
 
-daysToYears(365)
+daysToYears(30)
 
 // 5. Funkciją, kuri konvertuoja metus į valandas:
 // 5.1. Funkcija priima vieną parametrą: metų skaičių.
