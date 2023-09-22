@@ -109,11 +109,11 @@ function convertDays(days, format) {
     case `hours`:
       return `${days} days - ${days * 24} hours`
     case `weeks`:
-      return `${days} days - ${days / 7} weeks`
+      return `${days} days - ${(days / 7).toFixed(1)} weeks`
     case `months`:
-      return `${days} days - ${days / 30} months`
+      return `${days} days - ${(days / 30).toFixed(1)} months`
     case `years`:
-      return `${days} days - ${days / 365} years`
+      return `${days} days - ${(days / 365).toFixed(2)} years`
     default:
       return `Invalid format`
   }
@@ -135,9 +135,9 @@ function numberDivision(enterNum, divitionNum) {
 
   if (enterNum % divitionNum === 0) {
     return `${enterNum} dalinasi iš ${divitionNum}.`
-  } else {
-    return `Skaičius ${enterNum} nesidalina iš ${divitionNum}. Liekana yra ${remainder}.`
   }
+  return `Skaičius ${enterNum} nesidalina iš ${divitionNum}. Liekana yra ${remainder}.`
+  
 }
 
 console.log(numberDivision(2, 3))
@@ -150,9 +150,8 @@ function evenCount(text) {
 
   if (letterCount % 2 === 0) {
     return `Žodis ${text} turi porinį skaičių raidžių`
-  } else {
-    return `Žodis ${text} turi neporinį skaičių raidžių`
-  }
+  } 
+  return `Žodis ${text} turi neporinį skaičių raidžių`
 }
 
 console.log(evenCount(`laba`))
@@ -164,3 +163,22 @@ console.log(evenCount(`laba`))
 // 11.3. Jeigu nurodytas skaičius yra didesnis nei tekstas turi simbolių, tai reikia grąžinti error'ą tokiu formatu: Tekstas "Labas" turi 5 simbolius, o jūs nurodėte grąžinti 8.
 
 // 11.4. Patobulinti funkciją, kad būtų galima įrašyti neigiamą skaičių, jeigu norima gauti teksto simbolį skaičiuojant nuo jo galo, o ne nuo priekio.
+
+function symbolFromText(text, position) {
+  
+  let letter = text[position - 1]
+  let length = text.length
+  
+  if (position <= length) {
+    return `Teksto "${text}" ${position} raidė yra "${letter}".`
+  }
+
+  // if (position < 0) {
+  //   let symbol = text.charAt(length + position)
+  //   return `The ${position} symbol from the end of the text "${text}" is "${symbol}".`
+  // }
+
+    return `Tekstas "${text}" turi ${length} simbolius, o jūs nurodėte grąžinti ${position}.`
+}
+
+console.log(symbolFromText(`Geras`, 3))
