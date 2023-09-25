@@ -133,7 +133,7 @@ function numberDivision(enterNum, divitionNum) {
 
   let remainder = enterNum % divitionNum
 
-  if (enterNum % divitionNum === 0) {
+  if (remainder === 0) {
     return `${enterNum} dalinasi iš ${divitionNum}.`
   }
   return `Skaičius ${enterNum} nesidalina iš ${divitionNum}. Liekana yra ${remainder}.`
@@ -145,6 +145,9 @@ console.log(numberDivision(2, 3))
 // 10. Funkciją, kuri patikrina ar įvestas tekstas turi porini raidžių skaičių ar neporinį.
 
 function evenCount(text) {
+  if (typeof text !== `string`) {
+    return `Error: Įvesti duomenys turi būti tekstas`
+  }
 
   let letterCount = text.length
 
@@ -164,21 +167,71 @@ console.log(evenCount(`laba`))
 
 // 11.4. Patobulinti funkciją, kad būtų galima įrašyti neigiamą skaičių, jeigu norima gauti teksto simbolį skaičiuojant nuo jo galo, o ne nuo priekio.
 
-function symbolFromText(text, position) {
+// function symbolFromText(text, position) {
+
+//   let textLength = text.length
+
+//   if (position > textLength) {
+//     return `Tekstas "${text} turi ${textLength}" simbolius, o jūs nurodėte grąžinti ${position}.`
+//   }
   
-  let letter = text[position - 1]
-  let length = text.length
-  
-  if (position <= length) {
-    return `Teksto "${text}" ${position} raidė yra "${letter}".`
+//   let index = position - 1
+//   let symbol = text.at(index)
+
+//     return `Teksto "${text}" turi ${position} simbolis yra "${symbol}".`
+// }
+
+// console.log(symbolFromText(`Geras`, 3))
+
+function getSymbol(str, num) {
+  if (num === 0) {
+    return 'ERROR: reikia įvesti teigiamą arba neigiamą skaičių. Nulis nėra galimas variantas.'
   }
 
-  // if (position < 0) {
-  //   let symbol = text.charAt(length + position)
-  //   return `The ${position} symbol from the end of the text "${text}" is "${symbol}".`
+  if (!str || !num) {
+    return 'ERROR: neteisingai įvesti duomenys'
+  }
+
+  if (typeof str !== 'string') {
+    return 'ERROR: pirmas parametras privalo būti tekstas (string).'
+  }
+
+  if (isNaN(num)) {
+    return 'ERROR: antras parametras privalo būti skaičius (number).'
+  }
+
+  let strLength = str.length
+
+  // let convertedNum = num
+  // if (num < 0) {
+  //   convertedNum = num * -1
   // }
 
-    return `Tekstas "${text}" turi ${length} simbolius, o jūs nurodėte grąžinti ${position}.`
+  let convertedNum = num < 0 ? num : num * -1
+
+  if (convertedNum > strLength) {
+    return `Tekstas "${str}" turi ${strLength} simbolius, o jūs nurodėte grąžinti ${convertedNum}`
+  }
+
+  if (num < 0) {
+    let backSymbol = str.at(num)
+
+    return `Teksto "${str}" ${convertedNum} simbolis skaičiuojant nuo galo yra "${backSymbol}"`
+  }
+  
+  let index = num - 1
+  // let symbol = str[index]
+  // let symbol = str.charAt(index)
+  let symbol = str.at(index)
+
+  return `Teksto "${str}" ${num} simbolis yra "${symbol}".`
 }
 
-console.log(symbolFromText(`Geras`, 3))
+console.log(getSymbol('labas', 3))
+console.log(getSymbol('labas', 5))
+console.log(getSymbol('labas', 8))
+console.log(getSymbol('labas', -8))
+console.log(getSymbol('labas', -3))
+console.log(getSymbol('labas'))
+console.log(getSymbol(4, 5))
+console.log(getSymbol('labas', 0))
